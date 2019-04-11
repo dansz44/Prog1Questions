@@ -1,7 +1,8 @@
 '''Objective: Convert a number in any base to the same number in another base'''
-
+#NOTE: Work in progress 
 def convertBase(ls, b1, b2):
     return 0
+
 #----USER INPUT----#
 try:
     ls = []

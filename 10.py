@@ -1,0 +1,1 @@
+'''Objective: Find the smallest positive number that is evenly divisible by all the numbers from 1-20'''

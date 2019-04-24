@@ -1,28 +1,28 @@
-'''Objective: Convert a number in any base to the same number in another base'''
+'''Restriction: Only numbers in up to base 36 can be converted'''
 
 def convertBase(ls, b1, b2):
-    '''Converting number list -> base 10'''
-    b10 = 0
+    '''Converts numbers -> base 10'''
     b10List = []
-    for i in range(0, len(ls)): #Iterates through list of numbers
-        if ls[i] % b1 > b1:
-            x = ls[i] // 10
-            b10List.append(x)
-        else:
-            digits = [int(x) for x in str(ls[i])] #Separates multi-digit nums into individual digits
-            print(digits) #Just for testing, shows separation of digits
-            exp = len(digits)-1
-            for j in range(0, len(digits)):
-                b10 += digits[j] * (b1**exp)
-                exp -= 1
-            b10List.append(b10)
-            b10 = 0
-    print('B10:',b10List) #outputs final list of the numbers in base 10
-    '''Converting from base 10 -> desired base'''
-    #finalDigits = [int(x) for x in str(bTarget)] - to show as list-of-digits
-
-#----USER INPUT----#
-try:
+    for i in range(0, len(ls)):
+        if ls[i] < 0:   #Checks if number is negative, then makes it positive
+            ls[i] = ls[i] * -1
+        try:    #Checks if number entered is within base bounds
+            b10num = int(str(ls[i]), b1)
+            b10List.append(b10num)
+        except ValueError: #Error lies here, for when the number is out of bounds of base
+            if ls[i] // 10 > b1:
+               b10List.append(0)
+            else:
+                b10List.append(ls[i] // 10)
+    return b10List
+    '''Converts base 10 numbers -> desired base''' #This part functions normally (I think)
+    finalList = []
+    for i in range(0, len(b10List)):
+        while b10List[i]:
+            finalList.append(int(b10List[i] % b2))
+            b10List[i] //= b2
+    return finalList[::-1]
+def main():
     ls = []
     num = int(input('Enter a number: '))
     while num != 0:
@@ -30,13 +30,6 @@ try:
         num = int(input('Enter a number: '))
     b1 = int(input('Number is in base: '))
     b2 = int(input('Desired base: '))
-    #print(ls)
     print(convertBase(ls,b1,b2))
-except ValueError:
-    print('Invalid data entered :(')
 
-'''Things I need to fix: '''
-# Currently first block of the function doesn't take into account if the number is out of the bases range,
-#   i.e 98 base 8 *should* return 0, but doesn't in the code
-#   Solution might have something to do with % and finding a remainder?
-# Base 10 -> desired base conversion not coded yet
+main()

@@ -14,7 +14,6 @@ def convertBase(ls, b1, b2):
                b10List.append(0)
             else:
                 b10List.append(ls[i] // 10)
-    return b10List
     '''Converts base 10 numbers -> desired base''' #This part functions normally (I think)
     finalList = []
     for i in range(0, len(b10List)):

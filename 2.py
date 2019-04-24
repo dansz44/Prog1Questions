@@ -5,17 +5,21 @@ def convertBase(ls, b1, b2):
     b10 = 0
     b10List = []
     for i in range(0, len(ls)): #Iterates through list of numbers
-        digits = [int(x) for x in str(ls[i])] #Separates multi-digit nums into individual digits
-        print(digits) #Just for testing, shows separation of digits
-        exp = len(digits)-1
-        for j in range(0, len(digits)):
-            b10 += digits[j] * (b1**exp)
-            exp -= 1
-        b10List.append(b10)
-        b10 = 0
-    print(b10List) #outputs final list of the numbers in base 10
+        if ls[i] % b1 > b1:
+            x = ls[i] // 10
+            b10List.append(x)
+        else:
+            digits = [int(x) for x in str(ls[i])] #Separates multi-digit nums into individual digits
+            print(digits) #Just for testing, shows separation of digits
+            exp = len(digits)-1
+            for j in range(0, len(digits)):
+                b10 += digits[j] * (b1**exp)
+                exp -= 1
+            b10List.append(b10)
+            b10 = 0
+    print('B10:',b10List) #outputs final list of the numbers in base 10
     '''Converting from base 10 -> desired base'''
-    #[not started]
+    #finalDigits = [int(x) for x in str(bTarget)] - to show as list-of-digits
 
 #----USER INPUT----#
 try:
